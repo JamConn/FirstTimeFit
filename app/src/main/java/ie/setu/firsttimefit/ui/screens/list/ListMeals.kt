@@ -1,4 +1,4 @@
-package ie.setu.firsttimefit.ui.screens
+package ie.setu.firsttimefit.ui.screens.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +21,7 @@ import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun ListMealsScreen(
@@ -35,7 +36,7 @@ fun ListMealsScreen(
                 fontSize = 30.sp,
                 lineHeight = 34.sp,
                 textAlign = TextAlign.Center,
-                text = androidx.compose.ui.res.stringResource(R.string.empty_list)
+                text = stringResource(R.string.empty_list)
             )
         }
     } else {

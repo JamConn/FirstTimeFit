@@ -9,9 +9,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ie.setu.firsttimefit.data.MealModel
-import ie.setu.firsttimefit.ui.screens.AddMealScreen
-import ie.setu.firsttimefit.ui.screens.ListMealsScreen
-import ie.setu.firsttimefit.ui.screens.AboutScreen
+import ie.setu.firsttimefit.ui.screens.meal.AddMealScreen
+import ie.setu.firsttimefit.ui.screens.list.ListMealsScreen
+import ie.setu.firsttimefit.ui.screens.about.AboutScreen
 
 @Composable
 fun NavHostProvider(

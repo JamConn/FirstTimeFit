@@ -1,4 +1,4 @@
-package ie.setu.firsttimefit.ui.screens
+package ie.setu.firsttimefit.ui.screens.meal
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*

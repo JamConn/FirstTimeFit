@@ -23,7 +23,9 @@ import ie.setu.firsttimefit.data.fakeMeals
 import ie.setu.firsttimefit.navigation.*
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 import ie.setu.firsttimefit.ui.components.general.BottomAppBarProvider
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
