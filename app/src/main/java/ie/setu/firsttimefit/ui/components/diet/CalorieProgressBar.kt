@@ -19,7 +19,7 @@ import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 fun CalorieProgressBar(
     modifier: Modifier = Modifier,
     currentCalories: Int,
-    maxCalories: Int = 5000
+    maxCalories: Int = 2000
 ) {
     var progress by remember { mutableFloatStateOf(0f) }
     progress = currentCalories / maxCalories.toFloat()

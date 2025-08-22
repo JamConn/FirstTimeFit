@@ -16,5 +16,5 @@
     <string name="vegan">Vegan</string>
     <string name="reportTitle">All Dishes</string>
     <string name="empty_list">No Meals Yet - Get Eating!</string>
-
+    <string name="limitExceeded">Cannot add meal: exceeds %1$d calories limit</string>
 </resources>

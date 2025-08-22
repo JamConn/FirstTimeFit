@@ -1,5 +1,6 @@
 package ie.setu.firsttimefit.ui.components.diet
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -21,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.withStyle
 import ie.setu.firsttimefit.data.fakeMeals
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
@@ -35,23 +37,28 @@ fun AddMealButton(
     onTotalCaloriesChange: (Int) -> Unit
 ) {
     var totalCalories by remember { mutableIntStateOf(0) }
+    val context = LocalContext.current
+    val calorieLimit = 2000
+    val message = "Warning: Total calories exceeded $calorieLimit!"
 
-    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically){
+    Row {
         Button(
             onClick = {
                 totalCalories += meal.calories
                 onTotalCaloriesChange(totalCalories)
                 meals.add(meal)
+
+                // Show Toast if totalCalories exceeds the limit
+                if (totalCalories > calorieLimit) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
+
                 Timber.i("Meal added: $meal")
                 Timber.i("All Meals: ${meals.toList()}")
             },
             elevation = ButtonDefaults.buttonElevation(20.dp)
         ) {
-            Icon(
-                Icons.Default.Add,
-                contentDescription = "Add Meal",
-                modifier = Modifier.size(24.dp)
-            )
+            Icon(Icons.Default.Add, contentDescription = "Add Meal", modifier = Modifier.size(24.dp))
             Spacer(modifier.width(4.dp))
             Text(
                 text = stringResource(R.string.dietButton),
@@ -65,23 +72,10 @@ fun AddMealButton(
 
         Text(
             buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                        color = Color.Black
-                    )
-                ) {
+                withStyle(SpanStyle(fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)) {
                     append(stringResource(R.string.calories) + " ")
                 }
-
-                withStyle(
-                    style = SpanStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colorScheme.secondary
-                    )
-                ) {
+                withStyle(SpanStyle(fontWeight = FontWeight.Bold, fontSize = 20.sp, color = MaterialTheme.colorScheme.secondary)) {
                     append(totalCalories.toString())
                 }
             }
