@@ -48,7 +48,7 @@ fun AddMealButton(
                 onTotalCaloriesChange(totalCalories)
                 meals.add(meal)
 
-                // Show Toast if totalCalories exceeds the limit
+
                 if (totalCalories > calorieLimit) {
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 }

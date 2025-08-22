@@ -26,8 +26,7 @@ fun CalorieProgressBar(
 
     LinearProgressIndicator(
     progress = { progress },
-    modifier = modifier
-                .padding(top = 24.dp, bottom = 24.dp)
+    modifier = modifier.padding(top = 80.dp,bottom = 24.dp)
                 .height(8.dp)
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(16.dp)),
