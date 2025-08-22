@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.withStyle
 import ie.setu.firsttimefit.data.fakeMeals
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
@@ -35,7 +36,7 @@ fun AddMealButton(
 ) {
     var totalCalories by remember { mutableIntStateOf(0) }
 
-    Row {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically){
         Button(
             onClick = {
                 totalCalories += meal.calories
@@ -44,9 +45,13 @@ fun AddMealButton(
                 Timber.i("Meal added: $meal")
                 Timber.i("All Meals: ${meals.toList()}")
             },
-            elevation = ButtonDefaults.buttonElevation(20.dp) // matched lecturer
+            elevation = ButtonDefaults.buttonElevation(20.dp)
         ) {
-            Icon(Icons.Default.Add, contentDescription = "Add Meal")
+            Icon(
+                Icons.Default.Add,
+                contentDescription = "Add Meal",
+                modifier = Modifier.size(24.dp)
+            )
             Spacer(modifier.width(4.dp))
             Text(
                 text = stringResource(R.string.dietButton),
@@ -57,6 +62,7 @@ fun AddMealButton(
         }
 
         Spacer(modifier.weight(1f))
+
         Text(
             buildAnnotatedString {
                 withStyle(
@@ -66,7 +72,7 @@ fun AddMealButton(
                         color = Color.Black
                     )
                 ) {
-                    append("Total Calories: ")
+                    append(stringResource(R.string.calories) + " ")
                 }
 
                 withStyle(
@@ -88,11 +94,10 @@ fun AddMealButton(
 fun AddMealButtonPreview() {
     FirstTimeFitTheme {
         AddMealButton(
-            Modifier,
-            MealModel(), // placeholder for preview
+            modifier = Modifier,
+            meal = MealModel(),
             meals = fakeMeals.toMutableStateList(),
             onTotalCaloriesChange = {}
-
         )
     }
 }

@@ -30,7 +30,7 @@ fun DescriptionInput(
             onDescriptionChange(description)
         },
         modifier = modifier.fillMaxWidth(),
-        label = { Text(stringResource(R.string.enter_message)) } // Reusing enter_message string
+        label = { Text(stringResource(R.string.enter_message)) }
     )
 }
 

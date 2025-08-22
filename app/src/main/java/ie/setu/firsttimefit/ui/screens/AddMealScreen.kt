@@ -22,7 +22,6 @@ fun AddMealScreen(
     modifier: Modifier = Modifier,
     meals: SnapshotStateList<MealModel>
 ) {
-
     var mealType by remember { mutableStateOf("Meat") }
     var calories by remember { mutableIntStateOf(100) }
     var description by remember { mutableStateOf("No notes") }
@@ -43,27 +42,26 @@ fun AddMealScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButtonGroup(
-                    modifier = modifier,
+                    modifier = Modifier.weight(1f),
                     onDietTypeChange = { mealType = it }
                 )
-                Spacer(modifier.weight(1f))
+                Spacer(modifier = Modifier.width(16.dp))
                 CaloriePicker(
                     onCaloriesChange = { calories = it }
                 )
             }
 
             DescriptionInput(
-                modifier = modifier,
+                modifier = Modifier.fillMaxWidth(),
                 onDescriptionChange = { description = it }
             )
 
             CalorieProgressBar(
-                modifier = modifier,
+                modifier = Modifier.fillMaxWidth(),
                 currentCalories = totalCalories
             )
 
             AddMealButton(
-                modifier = modifier,
                 meal = MealModel(
                     mealType = mealType,
                     calories = calories,

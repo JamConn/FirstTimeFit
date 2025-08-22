@@ -15,4 +15,6 @@
     <string name="meat_free">Meat Free</string>
     <string name="vegan">Vegan</string>
     <string name="reportTitle">All Dishes</string>
+    <string name="empty_list">No Meals Yet - Get Eating!</string>
+
 </resources>
