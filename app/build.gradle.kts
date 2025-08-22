@@ -60,4 +60,5 @@ dependencies {
     implementation(libs.numberPicker)
     implementation(libs.timber)
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.navigation.compose)
 }
