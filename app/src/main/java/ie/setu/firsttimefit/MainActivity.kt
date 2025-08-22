@@ -4,24 +4,25 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import ie.setu.firsttimefit.data.MealModel
 import ie.setu.firsttimefit.data.fakeMeals
-import ie.setu.firsttimefit.ui.components.general.MenuItem
-import ie.setu.firsttimefit.ui.screens.AddMealScreen
-import ie.setu.firsttimefit.ui.screens.ListMealsScreen
+import ie.setu.firsttimefit.navigation.*
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
+import ie.setu.firsttimefit.ui.components.general.BottomAppBarProvider
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,60 +43,94 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FirstTimeFitApp(modifier: Modifier = Modifier) {
+fun FirstTimeFitApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()   // 🔹 Added per lecturer
+) {
     val meals = remember { mutableStateListOf<MealModel>() }
-    var selectedMenuItem by remember { mutableStateOf<MenuItem?>(MenuItem.AddMeal) }
+
+    // 🔹 Observe nav back stack to determine current screen
+    val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentNavBackStackEntry?.destination
+    val currentBottomScreen =
+        allDestinations.find { it.route == currentDestination?.route } ?: ListMeals
 
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                },
-                colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
-                actions = {
-                    if (selectedMenuItem == MenuItem.AddMeal) {
-                        IconButton(onClick = { selectedMenuItem = MenuItem.Report }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.List,
-                                contentDescription = "Show Meals",
-                                tint = MaterialTheme.colorScheme.onPrimary,
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
-                    } else {
-                        IconButton(onClick = { selectedMenuItem = MenuItem.AddMeal }) {
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = "Add Meal",
-                                tint = MaterialTheme.colorScheme.onPrimary,
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
-                    }
-                }
-            )
+            TopAppBarProvider(
+                currentScreen = currentBottomScreen,
+                canNavigateBack = navController.previousBackStackEntry != null
+            ) {
+                navController.navigateUp()
+            }
         },
         content = { paddingValues ->
-            when (selectedMenuItem) {
-                MenuItem.AddMeal -> AddMealScreen(
-                    modifier = Modifier.padding(paddingValues),
-                    meals = meals
-                )
-                MenuItem.Report -> ListMealsScreen(
-                    modifier = Modifier.padding(paddingValues),
-                    meals = meals
-                )
-                else -> {}
-            }
+            NavHostProvider(
+                modifier = modifier,
+                navController = navController,
+                paddingValues = paddingValues,
+                meals = meals
+            )
+        },
+        bottomBar = {
+            BottomAppBarProvider(
+                navController = navController,
+                currentScreen = currentBottomScreen
+            )
         }
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarProvider(
+    currentScreen: AppDestination,
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit = {}
+) {
+    TopAppBar(
+        title = {
+            Text(
+                text = currentScreen.label,
+                color = Color.White
+            )
+        },
+        colors = TopAppBarDefaults.largeTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        ),
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back Button",
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
+            } else {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = "Menu Button",
+                    tint = Color.White,
+                    modifier = Modifier.size(30.dp)
+                )
+            }
+        },
+        actions = { /* Optional DropDownMenu or actions */ }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TopAppBarPreview() {
+    FirstTimeFitTheme {
+        TopAppBarProvider(
+            currentScreen = AddMeal,
+            canNavigateBack = true
+        )
+    }
 }
 
 @Preview(showBackground = true)
