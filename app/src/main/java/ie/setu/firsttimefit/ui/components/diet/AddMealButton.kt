@@ -24,6 +24,7 @@ import androidx.compose.ui.text.withStyle
 import ie.setu.firsttimefit.data.fakeMeals
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 import ie.setu.firsttimefit.R
+import timber.log.Timber
 
 @Composable
 fun AddMealButton(
@@ -40,6 +41,8 @@ fun AddMealButton(
                 totalCalories += meal.calories
                 onTotalCaloriesChange(totalCalories)
                 meals.add(meal)
+                Timber.i("Meal added: $meal")
+                Timber.i("All Meals: ${meals.toList()}")
             },
             elevation = ButtonDefaults.buttonElevation(20.dp) // matched lecturer
         ) {
@@ -89,6 +92,7 @@ fun AddMealButtonPreview() {
             MealModel(), // placeholder for preview
             meals = fakeMeals.toMutableStateList(),
             onTotalCaloriesChange = {}
+
         )
     }
 }
