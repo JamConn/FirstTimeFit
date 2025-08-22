@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FirstTimeFit</string>
+    <string name="dietTitle">Welcome!!!</string>
+    <string name="dietSubtitle">Track Your Meals</string>
+    <string name="dietButton">Add Meal</string>
+    <string name="mealName">Meal Name</string>
+    <string name="calories">Calories</string>
+    <string name="mealListTitle">Meals List</string>
+    <string name="defaultMealName">Unnamed Meal</string>
+    <string name="defaultCalories">0</string>
+    <string name="enter_message">Enter Notes</string>
+    <string name="show_less">Show Less</string>
+    <string name="show_more">Show More</string>
+    <string name="meat">Meat</string>
+    <string name="meat_free">Meat Free</string>
+    <string name="vegan">Vegan</string>
 </resources>
