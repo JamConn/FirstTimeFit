@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import ie.setu.firsttimefit.data.MealModel
 import ie.setu.firsttimefit.ui.screens.AddMealScreen
 import ie.setu.firsttimefit.ui.screens.ListMealsScreen
+import ie.setu.firsttimefit.ui.screens.AboutScreen
 
 @Composable
 fun NavHostProvider(
@@ -29,6 +30,9 @@ fun NavHostProvider(
         }
         composable(route = ListMeals.route) {
             ListMealsScreen(modifier = modifier, meals = meals)
+        }
+        composable(route = About.route) {
+            AboutScreen(modifier = modifier)
         }
     }
 }

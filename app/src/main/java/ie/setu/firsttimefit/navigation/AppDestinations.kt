@@ -2,6 +2,7 @@ package ie.setu.firsttimefit.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -10,7 +11,6 @@ interface AppDestination {
     val label: String
     val route: String
 }
-
 
 object ListMeals : AppDestination {
     override val icon = Icons.AutoMirrored.Filled.List
@@ -24,6 +24,11 @@ object AddMeal : AppDestination {
     override val route = "add_meal"
 }
 
+object About : AppDestination {
+    override val icon = Icons.Filled.Info
+    override val label = "About"
+    override val route = "about"
+}
 
-val bottomAppBarDestinations = listOf(AddMeal, ListMeals)
-val allDestinations = listOf(ListMeals, AddMeal)
+val bottomAppBarDestinations = listOf(AddMeal, ListMeals, About)
+val allDestinations = listOf(ListMeals, AddMeal, About)
