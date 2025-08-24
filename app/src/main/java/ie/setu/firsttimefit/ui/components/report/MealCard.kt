@@ -12,19 +12,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Business
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ie.setu.firsttimefit.data.MealModel
 import java.text.DateFormat
 import java.util.Date
+import ie.setu.firsttimefit.R
 
 @Composable
 fun MealCard(
     mealType: String,
     calories: Int,
     description: String,
-    dateAdded: String
+    dateAdded: String,
+    onClickDelete: () -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -32,7 +37,7 @@ fun MealCard(
         ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 2.dp)
     ) {
-        MealCardContent(mealType, calories, description, dateAdded)
+        MealCardContent(mealType, calories, description, dateAdded, onClickDelete = onClickDelete)
     }
 }
 
@@ -41,9 +46,11 @@ private fun MealCardContent(
     mealType: String,
     calories: Int,
     description: String,
-    dateAdded: String
+    dateAdded: String,
+    onClickDelete: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var showDeleteConfirmDialog by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
@@ -86,6 +93,31 @@ private fun MealCardContent(
             )
             if (expanded) {
                 Text(modifier = Modifier.padding(vertical = 16.dp), text = description)
+
+
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilledTonalIconButton(
+                        onClick = { showDeleteConfirmDialog = true }
+                    ) {
+                        Icon(Icons.Filled.Delete, contentDescription = "Delete Meal")
+                    }
+                    FilledTonalIconButton(
+                        onClick = { /* Update afterf*/ }
+                    ) {
+                        Icon(Icons.Filled.Edit, contentDescription = "Edit Meal")
+                    }
+                }
+
+
+                if (showDeleteConfirmDialog) {
+                    showDeleteAlert(
+                        onDismiss = { showDeleteConfirmDialog = false },
+                        onDelete = {
+                            showDeleteConfirmDialog = false
+                            onClickDelete()
+                        }
+                    )
+                }
             }
         }
         IconButton(onClick = { expanded = !expanded }) {
@@ -97,6 +129,24 @@ private fun MealCardContent(
     }
 }
 
+@Composable
+fun showDeleteAlert(
+    onDismiss: () -> Unit,
+    onDelete: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(id = R.string.confirm_delete)) },
+        text = { Text(stringResource(id = R.string.confirm_delete_message)) },
+        confirmButton = {
+            Button(onClick = { onDelete() }) { Text("Yes") }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) { Text("No") }
+        }
+    )
+}
+
 @Preview
 @Composable
 fun MealCardPreview() {
@@ -104,6 +154,7 @@ fun MealCardPreview() {
         mealType = "Meat Free",
         calories = 250,
         description = "Grilled vegetables with quinoa",
-        dateAdded = DateFormat.getDateTimeInstance().format(Date())
+        dateAdded = DateFormat.getDateTimeInstance().format(Date()),
+        onClickDelete = {}
     )
 }

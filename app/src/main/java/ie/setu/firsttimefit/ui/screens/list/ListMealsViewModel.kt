@@ -27,5 +27,9 @@ class ListMealsViewModel @Inject constructor(
         }
     }
 
-
+    fun deleteMeal(meal: MealModel) {
+        viewModelScope.launch {
+            repository.deleteMeal(meal)
+        }
+    }
 }

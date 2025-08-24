@@ -54,7 +54,8 @@ fun ListMealsScreen(
                 ),
             ) {
                 ReportText()
-                MealCardList(meals = meals)
+                MealCardList(meals = meals, onDeleteMeal = { meal -> listMealsViewModel.deleteMeal(meal) })
+
             }
         }
     }
@@ -85,7 +86,8 @@ fun PreviewListMealsScreen(
                 ),
             ) {
                 ReportText()
-                MealCardList(meals = meals)
+                MealCardList(meals = meals, onDeleteMeal = {})
+
             }
         }
     }
