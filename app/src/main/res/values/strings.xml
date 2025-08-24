@@ -18,4 +18,6 @@
     <string name="empty_list">No Meals Yet - Get Eating!</string>
     <string name="limitExceeded">Cannot add meal: exceeds %1$d calories limit</string>
     <string name="about_message">Test About Page</string>
+    <string name="confirm_delete">Confirm Delete?</string>
+    <string name="confirm_delete_message">Are you sure you want to delete this meal?</string>
 </resources>

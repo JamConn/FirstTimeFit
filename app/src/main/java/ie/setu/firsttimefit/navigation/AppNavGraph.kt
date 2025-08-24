@@ -18,7 +18,6 @@ fun NavHostProvider(
     modifier: Modifier,
     navController: NavHostController,
     paddingValues: PaddingValues,
-    meals: SnapshotStateList<MealModel>
 ) {
     NavHost(
         navController = navController,
@@ -26,10 +25,10 @@ fun NavHostProvider(
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(route = AddMeal.route) {
-            AddMealScreen(modifier = modifier, meals = meals)
+            AddMealScreen(modifier = modifier)
         }
         composable(route = ListMeals.route) {
-            ListMealsScreen(modifier = modifier, meals = meals)
+            ListMealsScreen(modifier = modifier)
         }
         composable(route = About.route) {
             AboutScreen(modifier = modifier)

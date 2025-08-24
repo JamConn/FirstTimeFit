@@ -15,7 +15,7 @@ import java.text.DateFormat
 
 @Composable
 internal fun MealCardList(
-    meals: SnapshotStateList<MealModel>,
+    meals: List<MealModel>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
