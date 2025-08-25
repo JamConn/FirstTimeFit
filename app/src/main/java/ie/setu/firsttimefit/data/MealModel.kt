@@ -1,14 +1,18 @@
 package ie.setu.firsttimefit.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.Date
 import kotlin.random.Random
 
+@Entity
 data class MealModel(
-    val id: Int = Random.nextInt(1, 100000),
-    val mealType: String = "N/A",      // will correspond to radio button selection
-    val calories: Int = 0,              // calories input via number picker
-    val description: String = "No notes", // message/notes input by user
-    val dateAdded: Date = Date()        // timestamp
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val mealType: String = "N/A",
+    val calories: Int = 0,
+    var description: String = "No notes",
+    val dateAdded: Date = Date()
 )
 
 // Fake meals for testing and preview

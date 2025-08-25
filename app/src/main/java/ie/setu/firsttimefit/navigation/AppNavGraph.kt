@@ -9,16 +9,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ie.setu.firsttimefit.data.MealModel
-import ie.setu.firsttimefit.ui.screens.AddMealScreen
-import ie.setu.firsttimefit.ui.screens.ListMealsScreen
-import ie.setu.firsttimefit.ui.screens.AboutScreen
+import ie.setu.firsttimefit.ui.screens.meal.AddMealScreen
+import ie.setu.firsttimefit.ui.screens.list.ListMealsScreen
+import ie.setu.firsttimefit.ui.screens.about.AboutScreen
+import ie.setu.firsttimefit.ui.screens.details.DetailsScreen
 
 @Composable
 fun NavHostProvider(
     modifier: Modifier,
     navController: NavHostController,
     paddingValues: PaddingValues,
-    meals: SnapshotStateList<MealModel>
 ) {
     NavHost(
         navController = navController,
@@ -26,13 +26,27 @@ fun NavHostProvider(
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(route = AddMeal.route) {
-            AddMealScreen(modifier = modifier, meals = meals)
+            AddMealScreen(modifier = modifier)
         }
         composable(route = ListMeals.route) {
-            ListMealsScreen(modifier = modifier, meals = meals)
+            ListMealsScreen(modifier = modifier,onClickMealDetails = { mealId: Int -> navController.navigateToMealDetails(mealId)
+            })
+        }
+        composable(
+            route = Details.route,
+            arguments = Details.arguments
+        ) { navBackStackEntry ->
+            val id = navBackStackEntry.arguments?.getInt(Details.idArg)
+            if (id != null) {
+                DetailsScreen()
+            }
         }
         composable(route = About.route) {
             AboutScreen(modifier = modifier)
         }
     }
+}
+
+private fun NavHostController.navigateToMealDetails(mealId: Int) {
+    this.navigate("details/$mealId")
 }

@@ -1,4 +1,4 @@
-package ie.setu.firsttimefit.ui.screens
+package ie.setu.firsttimefit.ui.screens.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,13 +20,21 @@ import ie.setu.firsttimefit.ui.components.report.ReportText
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun ListMealsScreen(
     modifier: Modifier = Modifier,
-    meals: SnapshotStateList<MealModel>
+    onClickMealDetails: (Int) -> Unit,
+    listMealsViewModel: ListMealsViewModel = hiltViewModel()
 ) {
+
+    val meals = listMealsViewModel.uiMeals.collectAsState().value
+
     if (meals.isEmpty()) {
         Centre(Modifier.fillMaxSize()) {
             Text(
@@ -35,7 +43,7 @@ fun ListMealsScreen(
                 fontSize = 30.sp,
                 lineHeight = 34.sp,
                 textAlign = TextAlign.Center,
-                text = androidx.compose.ui.res.stringResource(R.string.empty_list)
+                text = stringResource(R.string.empty_list)
             )
         }
     } else {
@@ -47,7 +55,40 @@ fun ListMealsScreen(
                 ),
             ) {
                 ReportText()
-                MealCardList(meals = meals)
+                MealCardList(meals = meals,onClickMealDetails = onClickMealDetails, onDeleteMeal = { meal -> listMealsViewModel.deleteMeal(meal) })
+
+            }
+        }
+    }
+}
+
+@Composable
+fun PreviewListMealsScreen(
+    modifier: Modifier = Modifier,
+    meals: SnapshotStateList<MealModel>
+) {
+    if (meals.isEmpty()) {
+        Centre(Modifier.fillMaxSize()) {
+            Text(
+                color = MaterialTheme.colorScheme.secondary,
+                fontWeight = FontWeight.Bold,
+                fontSize = 30.sp,
+                lineHeight = 34.sp,
+                textAlign = TextAlign.Center,
+                text = stringResource(R.string.empty_list)
+            )
+        }
+    } else {
+        Column {
+            Column(
+                modifier = modifier.padding(
+                    start = 24.dp,
+                    end = 24.dp
+                ),
+            ) {
+                ReportText()
+                MealCardList(meals = meals, onClickMealDetails = {},onDeleteMeal = {})
+
             }
         }
     }
@@ -57,7 +98,7 @@ fun ListMealsScreen(
 @Composable
 fun ListMealsScreenPreview() {
     FirstTimeFitTheme {
-        ListMealsScreen(
+        PreviewListMealsScreen(
             modifier = Modifier,
             meals = fakeMeals.toMutableStateList()
         )
