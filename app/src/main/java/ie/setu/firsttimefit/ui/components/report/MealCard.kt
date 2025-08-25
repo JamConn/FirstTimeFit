@@ -29,7 +29,8 @@ fun MealCard(
     calories: Int,
     description: String,
     dateAdded: String,
-    onClickDelete: () -> Unit
+    onClickDelete: () -> Unit,
+    onClickMealDetails: () -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -37,7 +38,7 @@ fun MealCard(
         ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 2.dp)
     ) {
-        MealCardContent(mealType, calories, description, dateAdded, onClickDelete = onClickDelete)
+        MealCardContent(mealType, calories, description, dateAdded, onClickDelete = onClickDelete, onClickMealDetails = onClickMealDetails)
     }
 }
 
@@ -47,7 +48,8 @@ private fun MealCardContent(
     calories: Int,
     description: String,
     dateAdded: String,
-    onClickDelete: () -> Unit
+    onClickDelete: () -> Unit,
+    onClickMealDetails: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
@@ -101,10 +103,8 @@ private fun MealCardContent(
                     ) {
                         Icon(Icons.Filled.Delete, contentDescription = "Delete Meal")
                     }
-                    FilledTonalIconButton(
-                        onClick = { /* Update afterf*/ }
-                    ) {
-                        Icon(Icons.Filled.Edit, contentDescription = "Edit Meal")
+                    FilledTonalButton(onClick = onClickMealDetails) {
+                        Text(text = "Show More")
                     }
                 }
 
@@ -155,6 +155,7 @@ fun MealCardPreview() {
         calories = 250,
         description = "Grilled vegetables with quinoa",
         dateAdded = DateFormat.getDateTimeInstance().format(Date()),
-        onClickDelete = {}
+        onClickDelete = {},
+        onClickMealDetails = {}
     )
 }

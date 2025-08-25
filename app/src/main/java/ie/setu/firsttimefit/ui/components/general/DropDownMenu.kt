@@ -24,7 +24,7 @@ fun DropDownMenu() {
     Box(
         contentAlignment = Alignment.Center,
     ) {
-        // 3 vertical dots icon
+
         IconButton(onClick = { expanded = true }) {
             Icon(
                 imageVector = Icons.Default.MoreVert,

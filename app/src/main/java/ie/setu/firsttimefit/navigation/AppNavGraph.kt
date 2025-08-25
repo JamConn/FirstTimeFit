@@ -12,6 +12,7 @@ import ie.setu.firsttimefit.data.MealModel
 import ie.setu.firsttimefit.ui.screens.meal.AddMealScreen
 import ie.setu.firsttimefit.ui.screens.list.ListMealsScreen
 import ie.setu.firsttimefit.ui.screens.about.AboutScreen
+import ie.setu.firsttimefit.ui.screens.details.DetailsScreen
 
 @Composable
 fun NavHostProvider(
@@ -28,10 +29,24 @@ fun NavHostProvider(
             AddMealScreen(modifier = modifier)
         }
         composable(route = ListMeals.route) {
-            ListMealsScreen(modifier = modifier)
+            ListMealsScreen(modifier = modifier,onClickMealDetails = { mealId: Int -> navController.navigateToMealDetails(mealId)
+            })
+        }
+        composable(
+            route = Details.route,
+            arguments = Details.arguments
+        ) { navBackStackEntry ->
+            val id = navBackStackEntry.arguments?.getInt(Details.idArg)
+            if (id != null) {
+                DetailsScreen()
+            }
         }
         composable(route = About.route) {
             AboutScreen(modifier = modifier)
         }
     }
+}
+
+private fun NavHostController.navigateToMealDetails(mealId: Int) {
+    this.navigate("details/$mealId")
 }

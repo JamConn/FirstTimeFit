@@ -17,6 +17,7 @@ import java.text.DateFormat
 internal fun MealCardList(
     meals: List<MealModel>,
     modifier: Modifier = Modifier,
+    onClickMealDetails: (Int) -> Unit,
     onDeleteMeal: (MealModel) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
@@ -29,7 +30,8 @@ internal fun MealCardList(
                 calories = meal.calories,
                 description = meal.description,
                 dateAdded = DateFormat.getDateTimeInstance().format(meal.dateAdded),
-                onClickDelete = { onDeleteMeal(meal) }
+                onClickDelete = { onDeleteMeal(meal) },
+                onClickMealDetails = { onClickMealDetails(meal.id) }
             )
         }
     }
@@ -40,6 +42,7 @@ internal fun MealCardList(
 fun MealCardListPreview() {
     MealCardList(
         meals = fakeMeals.toMutableStateList(),
+        onClickMealDetails = {},
         onDeleteMeal = {}
     )
 }

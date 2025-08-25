@@ -29,6 +29,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 @Composable
 fun ListMealsScreen(
     modifier: Modifier = Modifier,
+    onClickMealDetails: (Int) -> Unit,
     listMealsViewModel: ListMealsViewModel = hiltViewModel()
 ) {
 
@@ -54,7 +55,7 @@ fun ListMealsScreen(
                 ),
             ) {
                 ReportText()
-                MealCardList(meals = meals, onDeleteMeal = { meal -> listMealsViewModel.deleteMeal(meal) })
+                MealCardList(meals = meals,onClickMealDetails = onClickMealDetails, onDeleteMeal = { meal -> listMealsViewModel.deleteMeal(meal) })
 
             }
         }
@@ -86,7 +87,7 @@ fun PreviewListMealsScreen(
                 ),
             ) {
                 ReportText()
-                MealCardList(meals = meals, onDeleteMeal = {})
+                MealCardList(meals = meals, onClickMealDetails = {},onDeleteMeal = {})
 
             }
         }

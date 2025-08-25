@@ -11,7 +11,7 @@ data class MealModel(
     val id: Int = 0,
     val mealType: String = "N/A",
     val calories: Int = 0,
-    val description: String = "No notes",
+    var description: String = "No notes",
     val dateAdded: Date = Date()
 )
 
