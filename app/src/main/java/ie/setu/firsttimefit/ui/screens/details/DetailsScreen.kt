@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ie.setu.firsttimefit.ui.components.details.DetailsScreenText
 import ie.setu.firsttimefit.ui.components.details.ReadOnlyTextField
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
+import ie.setu.firsttimefit.ui.components.general.ShowLoader
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -29,7 +32,7 @@ fun DetailsScreen(
     modifier: Modifier = Modifier,
     detailViewModel: DetailsViewModel = hiltViewModel()
 ) {
-    val meal by detailViewModel.meal
+    val meal = detailViewModel.meal.value
 
     val errorEmptyMessage = "Description cannot be empty..."
     val errorShortMessage = "Description must be at least 2 characters"
@@ -37,6 +40,13 @@ fun DetailsScreen(
     var onMessageChanged by rememberSaveable { mutableStateOf(false) }
     var isEmptyError by rememberSaveable { mutableStateOf(false) }
     var isShortError by rememberSaveable { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val isError = detailViewModel.isErr.value
+    val error = detailViewModel.error.value
+    val isLoading = detailViewModel.isLoading.value
+
+    if (isLoading) ShowLoader("Retrieving Meal Details...")
 
     fun validate(s: String) {
         isEmptyError = s.isEmpty()

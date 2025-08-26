@@ -14,10 +14,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import ie.setu.firsttimefit.navigation.About
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 
 @Composable
-fun DropDownMenu() {
+fun DropDownMenu(navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
     var selectedOptionText by remember { mutableStateOf("Help") }
 
@@ -52,6 +55,7 @@ fun DropDownMenu() {
                 onClick = {
                     selectedOptionText = "Info"
                     expanded = false
+                    navController.navigate(About.route)
                 }
             )
         }
@@ -62,6 +66,6 @@ fun DropDownMenu() {
 @Composable
 fun DropDownMenuPreview() {
     FirstTimeFitTheme {
-        DropDownMenu()
+        DropDownMenu(navController = rememberNavController())
     }
 }
