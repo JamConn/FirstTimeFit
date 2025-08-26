@@ -14,7 +14,8 @@ import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 @Composable
 fun BottomAppBarProvider(
     navController: NavHostController,
-    currentScreen: AppDestination
+    currentScreen: AppDestination,
+    userDestinations: List<AppDestination>
 ) {
     var navigationSelectedItem by remember { mutableIntStateOf(0) }
 
@@ -54,7 +55,8 @@ fun BottomAppBarPreview() {
     FirstTimeFitTheme {
         BottomAppBarProvider(
             navController = rememberNavController(),
-            currentScreen = bottomAppBarDestinations[0]
+            currentScreen = bottomAppBarDestinations.get(1),
+            bottomAppBarDestinations
         )
     }
 }

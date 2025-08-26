@@ -16,7 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.res.stringResource
-import ie.setu.firsttimefit.data.MealModel
+import ie.setu.firsttimefit.data.model.MealModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -25,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.withStyle
 import androidx.hilt.navigation.compose.hiltViewModel
-import ie.setu.firsttimefit.data.fakeMeals
+import ie.setu.firsttimefit.data.model.fakeMeals
 import ie.setu.firsttimefit.ui.theme.FirstTimeFitTheme
 import ie.setu.firsttimefit.R
 import ie.setu.firsttimefit.ui.screens.list.ListMealsViewModel

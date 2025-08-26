@@ -6,8 +6,8 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ie.setu.firsttimefit.data.MealModel
-import ie.setu.firsttimefit.data.fakeMeals
+import ie.setu.firsttimefit.data.model.MealModel
+import ie.setu.firsttimefit.data.model.fakeMeals
 import ie.setu.firsttimefit.ui.components.diet.AddMealButton
 import ie.setu.firsttimefit.ui.components.diet.CaloriePicker
 import ie.setu.firsttimefit.ui.components.diet.DescriptionInput
@@ -30,7 +30,7 @@ fun AddMealScreen(
     val meals = listMealsViewModel.uiMeals.collectAsState().value
     var totalCalories by remember { mutableIntStateOf(meals.sumOf { it.calories }) }
 
-
+    totalCalories = meals.sumOf { it.calories }
 
 
     Column {

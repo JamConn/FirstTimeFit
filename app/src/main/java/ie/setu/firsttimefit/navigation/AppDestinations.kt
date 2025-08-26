@@ -8,6 +8,11 @@ import androidx.compose.material.icons.filled.Details
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.automirrored.filled.Login
+import androidx.compose.material.icons.filled.AccountCircle
+
 
 interface AppDestination {
     val icon: ImageVector
@@ -39,8 +44,36 @@ object Details : AppDestination {
     const val idArg = "id"
     override val route = "details/{$idArg}"
     val arguments = listOf(
-        navArgument(idArg) { type = NavType.IntType }
+        navArgument(idArg) { type = NavType.StringType }
     )
 }
-val bottomAppBarDestinations = listOf(AddMeal, ListMeals, About)
-val allDestinations = listOf(ListMeals, AddMeal, About, Details)
+
+object Home : AppDestination {
+    override val icon = Icons.Filled.Home
+    override val label = "Home"
+    override val route = "home"
+}
+
+object Profile : AppDestination {
+    override val icon = Icons.Filled.Person
+    override val label = "Profile"
+    override val route = "profile"
+}
+
+object Login : AppDestination {
+    override val icon = Icons.AutoMirrored.Filled.Login
+    override val label = "Login"
+    override val route = "login"
+}
+
+object Register : AppDestination {
+    override val icon = Icons.Filled.AccountCircle
+    override val label = "Register"
+    override val route = "register"
+}
+
+val bottomAppBarDestinations = listOf(AddMeal, ListMeals, About, Profile)
+
+val userSignedOutDestinations = listOf(Login, Register)
+
+val allDestinations = listOf(ListMeals, AddMeal, About, Details, Home, Profile, Login, Register)

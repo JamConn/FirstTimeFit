@@ -4,26 +4,23 @@ package ie.setu.firsttimefit.ui.components.report
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ie.setu.firsttimefit.data.MealModel
-import ie.setu.firsttimefit.ui.components.report.MealCard
-import ie.setu.firsttimefit.data.fakeMeals
+import ie.setu.firsttimefit.data.model.MealModel
+import ie.setu.firsttimefit.data.model.fakeMeals
 import java.text.DateFormat
 
 @Composable
 internal fun MealCardList(
     meals: List<MealModel>,
     modifier: Modifier = Modifier,
-    onClickMealDetails: (Int) -> Unit,
-    onDeleteMeal: (MealModel) -> Unit
+    onDeleteMeal: (MealModel) -> Unit,
+    onClickMealDetails: (String) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
         items(
             items = meals,
-            key = { meal -> meal.id }
+            key = { meal -> meal._id }
         ) { meal ->
             MealCard(
                 mealType = meal.mealType,
@@ -31,7 +28,7 @@ internal fun MealCardList(
                 description = meal.description,
                 dateAdded = DateFormat.getDateTimeInstance().format(meal.dateAdded),
                 onClickDelete = { onDeleteMeal(meal) },
-                onClickMealDetails = { onClickMealDetails(meal.id) }
+                onClickMealDetails = { onClickMealDetails(meal._id) }
             )
         }
     }
@@ -41,8 +38,8 @@ internal fun MealCardList(
 @Composable
 fun MealCardListPreview() {
     MealCardList(
-        meals = fakeMeals.toMutableStateList(),
-        onClickMealDetails = {},
-        onDeleteMeal = {}
+        meals = fakeMeals,
+        onDeleteMeal = {},
+        onClickMealDetails = {}
     )
 }
