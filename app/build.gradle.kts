@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android.ksp)
     alias(libs.plugins.google.gms.google.services)
+    kotlin("kapt")
 }
 
 android {
@@ -67,7 +68,7 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
+    kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.savedstate)
     implementation(libs.androidx.room.runtime)
@@ -79,4 +80,13 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.play.services.auth)
     implementation(libs.googleid)
+    implementation(libs.androidx.health.connect)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.activity.compose.v180)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+
+
+
 }

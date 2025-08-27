@@ -1,5 +1,8 @@
 [versions]
+activityComposeVersion = "1.8.0"
 agp = "8.12.0"
+androidxConnectClient = "1.1.0-alpha11"
+connectClientVersion = "1.1.0-rc03"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -25,8 +28,12 @@ firebaseAuth = "24.0.1"
 playServicesAuth = "21.3.0"
 firebaseFirestore = "26.0.0"
 googleid = "1.1.1"
+healthConnect = "1.2.0-alpha01"
+
 
 [libraries]
+androidx-activity-compose-v180 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -59,6 +66,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
+androidx-health-connect = { module = "androidx.health.connect:connect-client", version.ref = "healthConnect" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

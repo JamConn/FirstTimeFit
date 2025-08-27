@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.automirrored.filled.Login
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.FitnessCenter
 
 
 interface AppDestination {
@@ -72,8 +73,13 @@ object Register : AppDestination {
     override val route = "register"
 }
 
-val bottomAppBarDestinations = listOf(AddMeal, ListMeals, About, Profile)
+object Health : AppDestination {
+    override val icon = Icons.Filled.FitnessCenter
+    override val label = "Health"
+    override val route = "health"
+}
+val bottomAppBarDestinations = listOf(AddMeal, ListMeals, Health, About, Profile)
 
 val userSignedOutDestinations = listOf(Login, Register)
 
-val allDestinations = listOf(ListMeals, AddMeal, About, Details, Home, Profile, Login, Register)
+val allDestinations = listOf(ListMeals, AddMeal, About, Details, Home, Profile, Login, Register, Health)

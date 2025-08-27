@@ -3,6 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission
+        android:name="android.permission.ACTIVITY_RECOGNITION"
+        android:required="false"/>
+    <uses-permission
+        android:name="android.permission.BODY_SENSORS"
+        android:required="false"/>
+
+    <uses-permission android:name="android.permission.health.READ_STEPS"/>
+    <uses-permission android:name="android.permission.health.WRITE_STEPS"/>
+    <uses-permission android:name="android.permission.health.READ_TOTAL_CALORIES_BURNED"/>
+    <uses-permission android:name="android.permission.health.WRITE_TOTAL_CALORIES_BURNED"/>
+
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -24,6 +39,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
             </intent-filter>
         </activity>
     </application>

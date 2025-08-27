@@ -1,12 +1,10 @@
 package ie.setu.firsttimefit.ui.components.general
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -143,7 +141,7 @@ fun HeadingLogoComponent() {
             modifier = Modifier.fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.login_homer),
+                painter = painterResource(id = R.drawable.login_pic),
                 contentDescription = "App Logo",
                 modifier = Modifier
                     .size(180.dp)
