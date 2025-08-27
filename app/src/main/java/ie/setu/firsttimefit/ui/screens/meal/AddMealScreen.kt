@@ -35,12 +35,11 @@ fun AddMealScreen(
 
     Column {
         Column(
-            modifier = modifier.padding(
-                start = 24.dp,
-                end = 24.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(30.dp)
-        ) {
+            modifier = modifier
+                .fillMaxSize()
+                .padding(start = 24.dp, end = 24.dp, bottom = 72.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ){
             WelcomeText()
 
             Row(
@@ -87,13 +86,13 @@ fun PreviewAddMealScreen(
     var mealType by remember { mutableStateOf("Meat") }
     var calories by remember { mutableIntStateOf(100) }
     var description by remember { mutableStateOf("No notes") }
-    var totalCalories by remember { mutableIntStateOf(meals.sumOf { it.calories }) }
-
+    var totalCalories = meals.sumOf { it.calories }
     Column {
         Column(
             modifier = modifier.padding(
                 start = 24.dp,
-                end = 24.dp
+                end = 24.dp,
+                bottom = 72.dp
             ),
             verticalArrangement = Arrangement.spacedBy(30.dp)
         ) {

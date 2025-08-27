@@ -17,7 +17,10 @@
     <string name="reportTitle">All Dishes</string>
     <string name="empty_list">No Meals Yet - Get Eating!</string>
     <string name="limitExceeded">Cannot add meal: exceeds %1$d calories limit</string>
-    <string name="about_message">Test About Page</string>
+    <string name="about_message">
+    First Time Fit is linked to my final year project of the same name.
+    It collects data from the Google Fitness Store to provide a unified place
+    for tracking your meals, calories, and health information.</string>
     <string name="confirm_delete">Confirm Delete?</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="show_password">Show password</string>
